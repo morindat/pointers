@@ -1,0 +1,42 @@
+# Build outputs
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+
+# Local binaries from examples
+basic
+pointer_types
+prog
+
+# Debug files
+*.dSYM/
+*.su
+*.gcda
+*.gcno
+*.gcov
+
+# CMake and build directories
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+build/
+out/
+bin/
+
+# Editor and OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Local environment
+.env
+.env.*
