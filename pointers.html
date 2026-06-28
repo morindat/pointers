@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Complete Pointers Guide: C/C++ from Zero to Advanced</title>
+<style>
+  @page { margin: 0.75in; }
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #1a1a1a;
+    max-width: 100%;
+    margin: 0;
+    padding: 20px 40px;
+  }
+  h1 {
+    font-size: 22pt;
+    color: #0d0d0d;
+    border-bottom: 3px solid #2c3e50;
+    padding-bottom: 8px;
+    margin-top: 40px;
+    page-break-after: avoid;
+  }
+  h2 {
+    font-size: 16pt;
+    color: #2c3e50;
+    margin-top: 30px;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-size: 13pt;
+    color: #34495e;
+    margin-top: 20px;
+    page-break-after: avoid;
+  }
+  p {
+    margin: 8px 0;
+    text-align: justify;
+  }
+  em {
+    color: #555;
+    font-style: italic;
+  }
+  strong { color: #111; }
+  code {
+    font-family: "Consolas", "Courier New", monospace;
+    background: #eef;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 10pt;
+    color: #c0392b;
+  }
+  pre {
+    background: #1e1e2e;
+    color: #d4d4d4;
+    padding: 16px 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 9.5pt;
+    line-height: 1.5;
+    margin: 14px 0;
+    page-break-inside: avoid;
+    white-space: pre;
+    border: 1px solid #333;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    color: inherit;
+    font-size: inherit;
+  }
+  .c  { color: #6a9955; }
+  .k  { color: #c586c0; }
+  .t  { color: #4ec9b0; }
+  .s  { color: #ce9178; }
+  .n  { color: #b5cea8; }
+  .d  { color: #d16969; }
+  .o  { color: #d4d4d4; }
+  .f  { color: #dcdcaa; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0;
+    font-size: 10pt;
+    page-break-inside: avoid;
+  }
+  th {
+    background: #2c3e50;
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  tr:hover td { background: #f0f4f8; }
+
+  blockquote {
+    border-left: 4px solid #3498db;
+    margin: 16px 0;
+    padding: 10px 20px;
+    background: #f8f9fa;
+    color: #333;
+    page-break-inside: avoid;
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid #ddd;
+    margin: 30px 0;
+  }
+
+  .stage-header {
+    background: #2c3e50;
+    color: white;
+    padding: 20px 25px;
+    border-radius: 10px;
+    margin: 40px 0 25px 0;
+    page-break-after: avoid;
+  }
+  .stage-header h1 {
+    color: white;
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: 20pt;
+  }
+
+  .exercise-box {
+    background: #fef9e7;
+    border: 2px solid #f1c40f;
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 25px 0;
+    page-break-inside: avoid;
+  }
+  .exercise-box h3 {
+    color: #b7950b;
+    margin-top: 0;
+  }
+  .exercise-box ol, .exercise-box ul {
+    margin: 8px 0 8px 20px;
+  }
+  .exercise-box li {
+    margin: 8px 0;
+  }
+
+  .quick-ref {
+    background: #eaf2f8;
+    border: 2px solid #2980b9;
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 25px 0;
+  }
+  .quick-ref h2 {
+    color: #2471a3;
+    margin-top: 0;
+  }
+  .quick-ref ul {
+    margin: 8px 0 8px 20px;
+  }
+  .quick-ref li {
+    margin: 6px 0;
+  }
+
+  .diagram {
+    background: #f5f5f0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 9pt;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+
+  .note {
+    background: #e8f6f3;
+    border-left: 4px solid #1abc9c;
+    padding: 10px 18px;
+    margin: 14px 0;
+    border-radius: 0 6px 6px 0;
+    page-break-inside: avoid;
+  }
+  .note strong { color: #16a085; }
+
+  .warning {
+    background: #fdedec;
+    border-left: 4px solid #e74c3c;
+    padding: 10px 18px;
+    margin: 14px 0;
+    border-radius: 0 6px 6px 0;
+    page-break-inside: avoid;
+  }
+  .warning strong { color: #c0392b; }
+</style>
+</head>
+<body>
+
+<blockquote>
+<em>A self-paced study reference. Built to be read once for orientation, then re-read section by section as you practice. Every section has working code, a "why this matters" note, and exercises.</em>
+</blockquote>
+
+<h1>How to Use This Guide</h1>
+
+<p>This is organized into <strong>5 stages</strong>, roughly one stage per week if you're going deep, faster if some material is review. Each stage builds on the last — don't skip the mental model sections even if the syntax looks familiar, because the syntax is the easy 20% and the mental model is the hard 80%.</p>
+
+<table>
+<tr><th>Stage</th><th>Focus</th><th>You'll know you're done when...</th></tr>
+<tr><td>1</td><td>What a pointer actually is</td><td>You can draw memory diagrams from code without running it</td></tr>
+<tr><td>2</td><td>Pointers + arrays + strings</td><td>You understand why <code>arr[i]</code> is sugar for pointer arithmetic</td></tr>
+<tr><td>3</td><td>Pointers + functions + dynamic memory</td><td>You can explain every malloc/free bug category and spot them in code</td></tr>
+<tr><td>4</td><td>C++ pointer model (references, smart pointers, RAII)</td><td>You know <em>why</em> modern C++ tries to make raw pointers rare</td></tr>
+<tr><td>5</td><td>Advanced manipulation</td><td>You can read/write function pointer tables, do pointer-based polymorphism by hand, reason about alignment, aliasing, and UB</td></tr>
+</table>
+
+<p>Compile examples with:</p>
+<pre><code>gcc -Wall -Wextra -g -fsanitize=address,undefined -o prog file.c
+g++ -std=c++20 -Wall -Wextra -g -fsanitize=address,undefined -o prog file.cpp</code></pre>
+
+<div class="note">
+<strong>Keep <code>-fsanitize=address,undefined</code> on for everything in this guide.</strong> Pointer bugs are silent until they aren't, and ASan will tell you the instant something is wrong instead of three weeks later in a different function.
+</div>
+
+<hr>
+
+<div class="stage-header">
+<h1>STAGE 1 — The Mental Model</h1>
+</div>
+
+<h2>1.1 What memory actually looks like</h2>
+
+<p>Forget syntax for a second. Your program's memory is one big array of bytes, each with an address (just a number). A variable is a <em>label</em> you've put on a span of those bytes.</p>
+
+<div class="diagram">Address     Byte
+0x7ffee10   [ ?? ]
+0x7ffee11   [ ?? ]
+0x7ffee12   [ ?? ]   &lt;- int x = 42 lives here (4 bytes, little-endian: 2A 00 00 00)
+0x7ffee13   [ ?? ]
+0x7ffee14   [ ?? ]</div>
+
+<p>A <strong>pointer</strong> is just a variable whose <em>value</em> is one of these addresses. That's the whole concept. Everything else — syntax, arithmetic, type safety — is bookkeeping built on top of "a number that means 'go look over there.'"</p>
+
+<pre><code><span class="t">int</span> x = <span class="n">42</span>;
+<span class="t">int</span> <span class="o">*</span>p = <span class="o">&amp;</span>x;     <span class="c">// p's value is the address of x</span></code></pre>
+
+<p>Draw this every time until it's automatic:</p>
+
+<div class="diagram">   x: [ 42 ]  @ 0x1000
+   p: [0x1000] @ 0x1008   (p "points to" x)</div>
+
+<h2>1.2 The two core operators</h2>
+
+<table>
+<tr><th>Operator</th><th>Name</th><th>Meaning</th></tr>
+<tr><td><code>&amp;</code></td><td>address-of</td><td>"Give me the address where this lives"</td></tr>
+<tr><td><code>*</code></td><td>dereference</td><td>"Go to the address stored here, give me what's there"</td></tr>
+</table>
+
+<pre><code><span class="t">int</span> x = <span class="n">42</span>;
+<span class="t">int</span> <span class="o">*</span>p = <span class="o">&amp;</span>x;      <span class="c">// p = address of x</span>
+
+<span class="f">printf</span>(<span class="s">"%d\n"</span>, x);    <span class="c">// 42</span>
+<span class="f">printf</span>(<span class="s">"%d\n"</span>, <span class="o">*</span>p);   <span class="c">// 42  — dereference p, read the int there</span>
+<span class="o">*</span>p = <span class="n">100</span>;              <span class="c">// go to x's address, write 100</span>
+<span class="f">printf</span>(<span class="s">"%d\n"</span>, x);    <span class="c">// 100 — x changed, because *p IS x's memory</span></code></pre>
+
+<div class="warning">
+<strong>Critical distinction:</strong> <code>*</code> means two different things depending on context, and this trips up beginners constantly:
+<pre><code><span class="t">int</span> <span class="o">*</span>p;       <span class="c">// here, * is part of the TYPE — "p is a pointer to int"</span>
+<span class="o">*</span>p = <span class="n">5</span>;       <span class="c">// here, * is the DEREFERENCE OPERATOR — "the int p points to"</span></code></pre>
+Read declarations right-to-left from the variable name: <code>int *p</code> → "p is a pointer to int."
+</div>
+
+<h2>1.3 Pointer types and why they exist</h2>
+
+<p>A pointer's type tells the compiler <strong>two things</strong>:</p>
+<ol>
+<li>How many bytes to read/write when you dereference it</li>
+<li>How far to "step" when you do pointer arithmetic (Stage 2)</li>
+</ol>
+
+<pre><code><span class="t">int</span>    <span class="o">*</span>pi;   <span class="c">// points to 4-byte ints (on typical platforms)</span>
+<span class="t">double</span> <span class="o">*</span>pd;   <span class="c">// points to 8-byte doubles</span>
+<span class="t">char</span>   <span class="o">*</span>pc;   <span class="c">// points to 1-byte chars</span>
+
+<span class="t">int</span> x = <span class="n">5</span>;
+<span class="t">char</span> <span class="o">*</span>cp = (<span class="t">char</span><span class="o">*</span>)<span class="o">&amp;</span>x;   <span class="c">// reinterpret x's address as "pointer to char"</span>
+<span class="f">printf</span>(<span class="s">"%d\n"</span>, cp[<span class="n">0</span>]);  <span class="c">// reads just the FIRST BYTE of x, not all of x</span></code></pre>
+
+<div class="note">
+<strong>Key fact:</strong> The pointer itself is always the same size (8 bytes on a 64-bit system) regardless of what it points to — <code>sizeof(int*) == sizeof(double*) == sizeof(char*)</code>. What differs is the <em>step size</em> used in arithmetic and the <em>width</em> read on dereference.
+</div>
+
+<h2>1.4 <code>void*</code> — the typeless pointer</h2>
+
+<p><code>void*</code> holds an address but the compiler doesn't know what's there. You can't dereference it directly or do arithmetic on it — you must cast it first.</p>
+
+<pre><code><span class="t">void</span> <span class="o">*</span>vp;
+<span class="t">int</span> x = <span class="n">5</span>;
+vp = <span class="o">&amp;</span>x;
+<span class="c">// *vp = 10;        // ERROR — compiler doesn't know the size/type</span>
+<span class="o">*</span>(<span class="t">int</span><span class="o">*</span>)vp = <span class="n">10</span>;     <span class="c">// OK — cast tells it "treat this as int*"</span></code></pre>
+
+<p><code>malloc</code> returns <code>void*</code> for exactly this reason — it doesn't know what type you'll store there.</p>
+
+<h2>1.5 NULL, uninitialized, and dangling — three different dangers</h2>
+
+<p>These get conflated by beginners but are distinct failure modes:</p>
+
+<pre><code><span class="t">int</span> <span class="o">*</span>p1;            <span class="c">// UNINITIALIZED — contains garbage, could be ANY address</span>
+<span class="t">int</span> <span class="o">*</span>p2 = <span class="k">NULL</span>;      <span class="c">// NULL — explicitly points to "nowhere" (address 0)</span>
+<span class="t">int</span> <span class="o">*</span>p3;
+{
+    <span class="t">int</span> local = <span class="n">5</span>;
+    p3 = <span class="o">&amp;</span>local;
+}                    <span class="c">// p3 is now DANGLING — local's stack frame is gone</span></code></pre>
+
+<table>
+<tr><th>State</th><th>What it means</th><th>Dereferencing it</th></tr>
+<tr><td>Uninitialized</td><td>Random garbage value</td><td>Undefined behavior — might crash, might silently corrupt something</td></tr>
+<tr><td>NULL</td><td>Deliberately "points nowhere"</td><td>Crash (segfault) — predictable and detectable</td></tr>
+<tr><td>Dangling</td><td>Pointed somewhere valid, but that memory was freed/left scope</td><td>Undefined behavior — may <em>look</em> fine for a while, then corrupt data unpredictably</td></tr>
+</table>
+
+<div class="warning">
+<strong>Rule of thumb:</strong> NULL is the <em>safe</em> invalid state because dereferencing it crashes immediately and loudly. Uninitialized and dangling pointers are dangerous precisely because they often don't crash — they read/write memory that happens to still hold old data, and your program limps along wrong until it doesn't. Always initialize pointers to <code>NULL</code> if you don't have a real value yet, and always set a pointer to <code>NULL</code> after freeing what it points to.
+<pre><code><span class="f">free</span>(p);
+p = <span class="k">NULL</span>;   <span class="c">// now if you accidentally use p again, you get a clean crash, not corruption</span></code></pre>
+</div>
+
+<h2>1.6 Pointer size, <code>sizeof</code>, and architecture</h2>
+
+<pre><code><span class="f">printf</span>(<span class="s">"%zu\n"</span>, <span class="k">sizeof</span>(<span class="t">int</span><span class="o">*</span>));      <span class="c">// 8 on 64-bit, 4 on 32-bit — NOT the pointee size</span>
+<span class="f">printf</span>(<span class="s">"%zu\n"</span>, <span class="k">sizeof</span>(<span class="t">int</span>));       <span class="c">// 4, always (on common platforms)</span>
+<span class="f">printf</span>(<span class="s">"%zu\n"</span>, <span class="k">sizeof</span>(<span class="o">*</span>p));        <span class="c">// size of what p points to, not p itself</span></code></pre>
+
+<div class="warning">
+<strong>Common beginner bug:</strong> <code>sizeof(p)</code> where <code>p</code> is <code>int*</code> gives you 8 (pointer size), not the size of the array you <em>think</em> <code>p</code> refers to. This bites people constantly when they pass an array to a function (Stage 2.4 explains why).
+</div>
+
+<div class="exercise-box">
+<h3>Exercises — Stage 1</h3>
+<ol>
+<li>Draw the memory diagram (boxes + addresses, made-up numbers are fine) for:
+<pre><code><span class="t">int</span> a = <span class="n">10</span>, b = <span class="n">20</span>;
+<span class="t">int</span> <span class="o">*</span>p = <span class="o">&amp;</span>a;
+p = <span class="o">&amp;</span>b;
+<span class="o">*</span>p = <span class="n">99</span>;</code></pre>
+What are the final values of <code>a</code> and <code>b</code>?</li>
+<li>Why does <code>char *cp = (char*)&amp;someInt; cp[0]</code> only show you part of the integer? Tie this to endianness.</li>
+<li>Write a function <code>swap_via_pointers(int *a, int *b)</code> and trace through why pass-by-value alone (<code>swap(int a, int b)</code>) can never work for swapping the caller's variables.</li>
+</ol>
+</div>
+
+<hr>
+
+<div class="stage-header">
+<h1>STAGE 2 — Pointers, Arrays, and Strings</h1>
+</div>
+
+<h2>2.1 The array/pointer equivalence (and where it breaks)</h2>
+
+<p>This is the single most important relationship in C. An array name, in most expressions, <em>decays</em> into a pointer to its first element.</p>
+
+<pre><code><span class="t">int</span> arr[<span class="n">5</span>] = {<span class="n">10</span>, <span class="n">20</span>, <span class="n">30</span>, <span class="n">40</span>, <span class="n">50</span>};
+<span class="t">int</span> <span class="o">*</span>p = arr;          <span class="c">// arr decays to &amp;arr[0] — no &amp; needed</span>
+
+<span class="f">printf</span>(<span class="s">"%d\n"</span>, arr[<span class="n">2</span>]);     <span class="c">// 30</span>
+<span class="f">printf</span>(<span class="s">"%d\n"</span>, <span class="o">*</span>(arr + <span class="n">2</span>)); <span class="c">// 30 — IDENTICAL operation</span>
+<span class="f">printf</span>(<span class="s">"%d\n"</span>, <span class="o">*</span>(p + <span class="n">2</span>));   <span class="c">// 30 — same again</span>
+<span class="f">printf</span>(<span class="s">"%d\n"</span>, p[<span class="n">2</span>]);       <span class="c">// 30 — pointers can use [] syntax too</span></code></pre>
+
+<p><code>arr[i]</code> is literally defined as <code>*(arr + i)</code>. The compiler computes the address by adding <code>i * sizeof(element)</code> to the base address, then dereferences. This is why arrays are zero-indexed — it's not a convention, it's an offset of zero from the base.</p>
+
+<pre><code>arr[<span class="n">2</span>]  ==  <span class="o">*</span>(arr + <span class="n">2</span>)  ==  <span class="o">*</span>(<span class="n">2</span> + arr)  ==  <span class="n">2</span>[arr]   <span class="c">// yes, 2[arr] compiles and works</span></code></pre>
+
+<h3>Where the equivalence breaks: <code>sizeof</code></h3>
+
+<pre><code><span class="t">int</span> arr[<span class="n">5</span>];
+<span class="t">int</span> <span class="o">*</span>p = arr;
+
+<span class="k">sizeof</span>(arr);   <span class="c">// 20 — sizeof of the WHOLE ARRAY (5 * 4 bytes)</span>
+<span class="k">sizeof</span>(p);     <span class="c">// 8  — sizeof of a POINTER, because p is just an address</span></code></pre>
+
+<p>This is the #1 source of "why doesn't my function know the array length" bugs (see 2.4).</p>
+
+<h2>2.2 Pointer arithmetic — what <code>+1</code> really means</h2>
+
+<p>When you add 1 to a pointer, the compiler adds <code>sizeof(pointee type)</code> bytes, not literally 1 byte.</p>
+
+<pre><code><span class="t">int</span> arr[<span class="n">5</span>] = {<span class="n">0</span>};
+<span class="t">int</span> <span class="o">*</span>p = arr;
+p + <span class="n">1</span>;   <span class="c">// address advances by sizeof(int) = 4 bytes, now points to arr[1]</span>
+
+<span class="t">char</span> carr[<span class="n">5</span>] = {<span class="n">0</span>};
+<span class="t">char</span> <span class="o">*</span>cp = carr;
+cp + <span class="n">1</span>;  <span class="c">// address advances by sizeof(char) = 1 byte, now points to carr[1]</span></code></pre>
+
+<div class="diagram">int *p, p+0, p+1, p+2 ...
+  [int 0][int 1][int 2][int 3]
+   ^p      ^p+1   ^p+2   ^p+3
+   addr=0  addr=4 addr=8 addr=12</div>
+
+<p><strong>Pointer subtraction</strong> gives you the number of elements between two pointers (not bytes):</p>
+
+<pre><code><span class="t">int</span> arr[<span class="n">5</span>];
+<span class="t">int</span> <span class="o">*</span>start = <span class="o">&amp;</span>arr[<span class="n">0</span>];
+<span class="t">int</span> <span class="o">*</span>end = <span class="o">&amp;</span>arr[<span class="n">4</span>];
+<span class="t">ptrdiff_t</span> n = end - start;   <span class="c">// 4 (elements), not 16 (bytes)</span></code></pre>
+
+<div class="note">
+This is <em>only</em> legal/meaningful within the same array. Subtracting pointers into unrelated objects is undefined behavior even if it compiles.
+</div>
+
+<h2>2.3 <code>const</code> and pointers — four combinations you must memorize</h2>
+
+<p>This trips up everyone at some point, including experienced programmers reaching for the right syntax. Read it as: <strong><code>const</code> applies to whatever is immediately to its left</strong> (or to the type if it's at the very start).</p>
+
+<pre><code><span class="t">int</span> x = <span class="n">5</span>, y = <span class="n">10</span>;
+
+<span class="k">const</span> <span class="t">int</span> <span class="o">*</span>p1 = <span class="o">&amp;</span>x;        <span class="c">// pointer to CONST int — can't change *p1, CAN reassign p1</span>
+p1 = <span class="o">&amp;</span>y;                    <span class="c">// OK</span>
+<span class="c">// *p1 = 1;                 // ERROR</span>
+
+<span class="t">int</span> <span class="o">*</span><span class="k">const</span> p2 = <span class="o">&amp;</span>x;        <span class="c">// CONST pointer to int — CAN change *p2, can't reassign p2</span>
+<span class="o">*</span>p2 = <span class="n">1</span>;                    <span class="c">// OK</span>
+<span class="c">// p2 = &amp;y;                 // ERROR</span>
+
+<span class="k">const</span> <span class="t">int</span> <span class="o">*</span><span class="k">const</span> p3 = <span class="o">&amp;</span>x;  <span class="c">// const pointer to const int — neither can change</span>
+<span class="c">// *p3 = 1;                 // ERROR</span>
+<span class="c">// p3 = &amp;y;                 // ERROR</span>
+
+<span class="t">int</span> <span class="k">const</span> <span class="o">*</span>p4 = <span class="o">&amp;</span>x;        <span class="c">// IDENTICAL to p1 — "const int" and "int const" are the same</span></code></pre>
+
+<div class="note">
+<strong>Mnemonic:</strong> read right to left from the variable. <code>int *const p2</code> → "p2 is a const pointer to int." <code>const int *p1</code> → "p1 is a pointer to const int."
+</div>
+
+<p>This matters hugely in function signatures — <code>const char *s</code> is "I promise not to modify what you handed me," which is how most string-reading library functions declare their parameters.</p>
+
+<h2>2.4 Arrays decay when passed to functions — the trap</h2>
+
+<pre><code><span class="t">void</span> <span class="f">f</span>(<span class="t">int</span> arr[<span class="n">5</span>]) {       <span class="c">// looks like an array parameter...</span>
+    <span class="f">printf</span>(<span class="s">"%zu\n"</span>, <span class="k">sizeof</span>(arr));  <span class="c">// ...but this prints 8, not 20!</span>
+}
+<span class="c">// f's parameter is ACTUALLY `int *arr` — the [5] is purely decorative,</span>
+<span class="c">// the compiler silently rewrites it to a pointer.</span>
+
+<span class="t">void</span> <span class="f">g</span>(<span class="t">int</span> <span class="o">*</span>arr, <span class="t">size_t</span> len) {   <span class="c">// the honest version — always pass length explicitly</span>
+    <span class="k">for</span> (<span class="t">size_t</span> i = <span class="n">0</span>; i &lt; len; i++) <span class="f">printf</span>(<span class="s">"%d "</span>, arr[i]);
+}</code></pre>
+
+<div class="warning">
+<strong>Rule:</strong> in C, you can never recover an array's length from a pointer to it. There is no metadata attached. This is <em>the</em> reason so many C APIs take a <code>(pointer, length)</code> pair, and why buffer overflows are endemic in C — the language gives you zero built-in protection here. (This is also one of the big reasons <code>std::vector</code> and <code>std::array</code> exist in C++ — see Stage 4.)
+</div>
+
+<p>The one place array-ness survives is <code>sizeof</code> <em>on the actual array variable in its own scope</em> — the moment it's passed to a function, it's a pointer, full stop.</p>
+
+<h2>2.5 Strings are just <code>char*</code> (or <code>char[]</code>) — and the trailing <code>\0</code></h2>
+
+<p>C has no string type. A "C string" is a convention: a pointer to a sequence of chars, terminated by a <code>'\0'</code> byte (value 0).</p>
+
+<pre><code><span class="t">char</span> s1[] = <span class="s">"hi"</span>;        <span class="c">// array of 3 chars: 'h','i','\0' — sizeof(s1) == 3</span>
+<span class="t">char</span> <span class="o">*</span>s2 = <span class="s">"hi"</span>;          <span class="c">// pointer to a string literal (read-only memory!)</span>
+
+s1[<span class="n">0</span>] = <span class="s">'H'</span>;              <span class="c">// fine — s1 is a mutable local array</span>
+<span class="c">// s2[0] = 'H';            // UNDEFINED BEHAVIOR — string literals are read-only</span></code></pre>
+
+<div class="warning">
+This is a classic gotcha: <code>char *s2 = "hi";</code> <em>looks</em> mutable because it's not declared <code>const</code>, but modifying through it is UB on most platforms (it'll often segfault, because string literals live in a read-only data section). Modern compilers will warn you; some platforms historically didn't crash, which is exactly the kind of "works until it doesn't" trap pointers are full of.
+</div>
+
+<pre><code><span class="t">size_t</span> <span class="f">my_strlen</span>(<span class="k">const</span> <span class="t">char</span> <span class="o">*</span>s) {
+    <span class="t">size_t</span> n = <span class="n">0</span>;
+    <span class="k">while</span> (s[n] != <span class="s">'\0'</span>) n++;   <span class="c">// walk until terminator</span>
+    <span class="k">return</span> n;
+}</code></pre>
+
+<p>Every <code>str*</code> function in <code>&lt;string.h&gt;</code> is, under the hood, pointer-walking until it finds <code>\0</code>. <code>strcpy</code> doesn't know the destination buffer's size — it just keeps writing bytes until it hits the source's terminator. That's exactly why <code>strcpy</code> is the textbook example of a buffer-overflow vulnerability, and why <code>strncpy</code>/<code>snprintf</code> exist.</p>
+
+<h2>2.6 Multi-dimensional arrays and pointer-to-pointer — these are NOT the same thing</h2>
+
+<p>This is one of the most confused areas in C. There are three different things that all "look like" 2D arrays:</p>
+
+<h3>(a) A true 2D array</h3>
+<p>Contiguous memory, fixed dimensions known at compile time:</p>
+<pre><code><span class="t">int</span> grid[<span class="n">3</span>][<span class="n">4</span>];   <span class="c">// 12 contiguous ints, laid out row by row</span>
+<span class="c">// grid[i][j] == *(*(grid + i) + j) conceptually, but grid decays to</span>
+<span class="c">// "pointer to array of 4 ints", NOT "pointer to pointer to int"</span>
+<span class="t">int</span> (<span class="o">*</span>p)[<span class="n">4</span>] = grid;    <span class="c">// correct pointer type for this — note the parens!</span></code></pre>
+
+<h3>(b) An array of pointers</h3>
+<p>Rows can be different sizes, scattered in memory:</p>
+<pre><code><span class="t">int</span> <span class="o">*</span>rows[<span class="n">3</span>];                    <span class="c">// 3 pointers, not necessarily contiguous data</span>
+rows[<span class="n">0</span>] = <span class="f">malloc</span>(<span class="n">4</span> <span class="o">*</span> <span class="k">sizeof</span>(<span class="t">int</span>));
+rows[<span class="n">1</span>] = <span class="f">malloc</span>(<span class="n">7</span> <span class="o">*</span> <span class="k">sizeof</span>(<span class="t">int</span>));   <span class="c">// jagged array — different lengths per row</span>
+rows[<span class="n">2</span>] = <span class="f">malloc</span>(<span class="n">2</span> <span class="o">*</span> <span class="k">sizeof</span>(<span class="t">int</span>));</code></pre>
+
+<h3>(c) A pointer to pointer</h3>
+<p>The type used when a function needs to <em>modify</em> a pointer-to-pointer structure, or to receive (b) generically:</p>
+<pre><code><span class="t">void</span> <span class="f">process</span>(<span class="t">int</span> <span class="o">**</span>rows, <span class="t">int</span> n) {
+    <span class="k">for</span> (<span class="t">int</span> i = <span class="n">0</span>; i &lt; n; i++) <span class="f">free</span>(rows[i]);
+}</code></pre>
+
+<div class="warning">
+<strong>The classic mistake:</strong> treating <code>int grid[3][4]</code> as if it decays to <code>int**</code>. It doesn't — it decays to <code>int (*)[4]</code>, "pointer to array of 4 ints." Passing <code>grid</code> where <code>int **</code> is expected is a type error the compiler should catch, but if you cast around it (or use <code>void*</code> carelessly), you'll get silently wrong arithmetic, because the step size is different (<code>sizeof(int[4])</code> = 16 bytes vs <code>sizeof(int*)</code> = 8 bytes).
+</div>
+
+<div class="diagram">True 2D array (contiguous):           Array of pointers (jagged):
+[0][0][0][0]  &lt;- row 0                rows[0] -&gt; [0][0][0][0]
+[0][0][0][0]  &lt;- row 1                rows[1] -&gt; [0][0][0][0][0][0][0]
+[0][0][0][0]  &lt;- row 2                rows[2] -&gt; [0][0]
+  one block of 12 ints                  three separate allocations</div>
+
+<div class="exercise-box">
+<h3>Exercises — Stage 2</h3>
+<ol>
+<li>Write <code>void reverse(int *arr, size_t n)</code> that reverses an array in place using two pointers walking toward each other.</li>
+<li>Implement your own <code>strcpy</code> and then your own bounds-safe version that takes a destination buffer size.</li>
+<li>Given <code>int grid[3][4]</code>, write a loop using pointer arithmetic only (no <code>[]</code>) that prints every element, and explain what type <code>grid + 1</code> has and what address it computes.</li>
+<li>Explain in your own words why <code>char *s = "hello"; s[0] = 'H';</code> compiles but is undefined behavior.</li>
+</ol>
+</div>
+
+<hr>
+
+<div class="stage-header">
+<h1>STAGE 3 — Pointers, Functions, and Dynamic Memory</h1>
+</div>
+
+<h2>3.1 Pass-by-value vs. pass-by-pointer (simulated pass-by-reference)</h2>
+
+<p>C only has pass-by-value. There is no other calling convention. "Pass by reference" in C is something you simulate by passing an address and dereferencing it.</p>
+
+<pre><code><span class="t">void</span> <span class="f">increment_wrong</span>(<span class="t">int</span> x) { x++; }              <span class="c">// modifies a LOCAL COPY, caller sees nothing</span>
+<span class="t">void</span> <span class="f">increment_right</span>(<span class="t">int</span> <span class="o">*</span>x) { (<span class="o">*</span>x)++; }           <span class="c">// modifies the caller's int, via its address</span>
+
+<span class="t">int</span> n = <span class="n">5</span>;
+<span class="f">increment_wrong</span>(n);   <span class="f">printf</span>(<span class="s">"%d\n"</span>, n);  <span class="c">// 5 — unchanged</span>
+<span class="f">increment_right</span>(<span class="o">&amp;</span>n);  <span class="f">printf</span>(<span class="s">"%d\n"</span>, n);  <span class="c">// 6 — changed</span></code></pre>
+
+<p>A pointer parameter is still passed by value — what's copied is the <em>address</em>, not the pointee. That copied address still points at the original data, which is why dereferencing it lets you reach back into the caller's memory.</p>
+
+<h2>3.2 Function pointers</h2>
+
+<p>A function, once compiled, lives at some address in the code segment. You can take that address and call through it.</p>
+
+<pre><code><span class="t">int</span> <span class="f">add</span>(<span class="t">int</span> a, <span class="t">int</span> b) { <span class="k">return</span> a + b; }
+<span class="t">int</span> <span class="f">sub</span>(<span class="t">int</span> a, <span class="t">int</span> b) { <span class="k">return</span> a - b; }
+
+<span class="t">int</span> (<span class="o">*</span>op)(<span class="t">int</span>, <span class="t">int</span>);   <span class="c">// op is a pointer to a function taking (int,int), returning int</span>
+op = add;
+<span class="f">printf</span>(<span class="s">"%d\n"</span>, op(<span class="n">3</span>, <span class="n">4</span>));   <span class="c">// 7</span>
+op = sub;
+<span class="f">printf</span>(<span class="s">"%d\n"</span>, op(<span class="n">3</span>, <span class="n">4</span>));   <span class="c">// -1</span></code></pre>
+
+<div class="warning">
+Read <code>int (*op)(int, int)</code> carefully: the parens around <code>*op</code> are mandatory. Without them, <code>int *op(int, int)</code> declares a <em>function</em> named <code>op</code> that <em>returns</em> <code>int*</code> — a completely different thing.
+</div>
+
+<h3>Practical use — dispatch tables</h3>
+<p>How you build a primitive vtable/strategy pattern in C:</p>
+
+<pre><code><span class="k">typedef</span> <span class="t">int</span> (<span class="o">*</span><span class="t">BinOp</span>)(<span class="t">int</span>, <span class="t">int</span>);   <span class="c">// typedef makes the type usable without the scary syntax</span>
+
+<span class="t">BinOp</span> table[] = { add, sub };
+<span class="k">const</span> <span class="t">char</span> <span class="o">*</span>names[] = { <span class="s">"add"</span>, <span class="s">"sub"</span> };
+
+<span class="k">for</span> (<span class="t">int</span> i = <span class="n">0</span>; i &lt; <span class="n">2</span>; i++)
+    <span class="f">printf</span>(<span class="s">"%s(3,4) = %d\n"</span>, names[i], table[i](<span class="n">3</span>, <span class="n">4</span>));</code></pre>
+
+<p><code>qsort</code> is the canonical libc example — it takes a comparator function pointer so it can sort anything:</p>
+
+<pre><code><span class="t">int</span> <span class="f">cmp_int</span>(<span class="k">const</span> <span class="t">void</span> <span class="o">*</span>a, <span class="k">const</span> <span class="t">void</span> <span class="o">*</span>b) {
+    <span class="t">int</span> ia = <span class="o">*</span>(<span class="k">const</span> <span class="t">int</span><span class="o">*</span>)a, ib = <span class="o">*</span>(<span class="k">const</span> <span class="t">int</span><span class="o">*</span>)b;
+    <span class="k">return</span> (ia > ib) - (ia &lt; ib);
+}
+<span class="t">int</span> arr[] = {<span class="n">5</span>,<span class="n">3</span>,<span class="n">1</span>,<span class="n">4</span>,<span class="n">2</span>};
+<span class="f">qsort</span>(arr, <span class="n">5</span>, <span class="k">sizeof</span>(<span class="t">int</span>), cmp_int);</code></pre>
+
+<h2>3.3 Pointers to pointers (<code>**</code>) — when and why</h2>
+
+<p>You need a pointer-to-pointer whenever a function must <strong>modify the pointer itself</strong>, not just what it points to.</p>
+
+<pre><code><span class="t">void</span> <span class="f">allocate</span>(<span class="t">int</span> <span class="o">**</span>p, <span class="t">int</span> n) {
+    <span class="o">*</span>p = <span class="f">malloc</span>(n <span class="o">*</span> <span class="k">sizeof</span>(<span class="t">int</span>));   <span class="c">// modifies the CALLER's pointer variable</span>
+}
+
+<span class="t">int</span> <span class="o">*</span>arr = <span class="k">NULL</span>;
+<span class="f">allocate</span>(<span class="o">&amp;</span>arr, <span class="n">10</span>);   <span class="c">// pass the ADDRESS of arr, so allocate can set arr itself</span>
+<span class="c">// arr now points to 10 ints — without **, allocate could only set a local copy</span></code></pre>
+
+<div class="note">
+Without the double pointer, <code>allocate(int *p, int n) { p = malloc(...); }</code> would allocate memory, assign it to the <em>local copy</em> <code>p</code>, and then that memory address is lost the moment the function returns — a classic beginner memory leak / "why is my pointer still NULL" bug.
+</div>
+
+<p>This generalizes: <code>*</code> peels off one level of indirection. <code>T**</code> is "pointer to (pointer to T)" — to modify the inner <code>T*</code>, you need the outer pointer.</p>
+
+<h2>3.4 Dynamic memory: <code>malloc</code>, <code>calloc</code>, <code>realloc</code>, <code>free</code></h2>
+
+<p>Stack memory (local variables) is automatic and scoped — it disappears when the function returns. Heap memory is <em>manual</em> — you control its lifetime explicitly, which is powerful and also the source of most C bugs.</p>
+
+<pre><code><span class="t">int</span> <span class="o">*</span>p = <span class="f">malloc</span>(<span class="n">10</span> <span class="o">*</span> <span class="k">sizeof</span>(<span class="t">int</span>));   <span class="c">// raw bytes, UNINITIALIZED — garbage values</span>
+<span class="k">if</span> (p == <span class="k">NULL</span>) { <span class="c">/* malloc failed — ALWAYS check this in real code */</span> }
+
+<span class="t">int</span> <span class="o">*</span>q = <span class="f">calloc</span>(<span class="n">10</span>, <span class="k">sizeof</span>(<span class="t">int</span>));    <span class="c">// same size, but ZEROED — slightly slower, often safer</span>
+
+p = <span class="f">realloc</span>(p, <span class="n">20</span> <span class="o">*</span> <span class="k">sizeof</span>(<span class="t">int</span>));    <span class="c">// grow/shrink; MAY move the block — old pointer may be invalid</span>
+<span class="c">// realloc returns NULL on failure WITHOUT freeing the original — don't overwrite</span>
+<span class="c">// your only pointer to it without checking first, or you leak:</span>
+<span class="t">int</span> <span class="o">*</span>tmp = <span class="f">realloc</span>(p, <span class="n">1000000000000UL</span>);   <span class="c">// huge size, likely fails</span>
+<span class="k">if</span> (tmp == <span class="k">NULL</span>) { <span class="c">/* p is STILL VALID here — handle the error, don't lose it */</span> }
+<span class="k">else</span> { p = tmp; }
+
+<span class="f">free</span>(p);     <span class="c">// release back to the allocator</span>
+p = <span class="k">NULL</span>;    <span class="c">// defensive — see 1.5</span></code></pre>
+
+<h3>The four classic heap bugs</h3>
+
+<pre><code><span class="c">// 1. Memory leak — lose the only pointer to allocated memory</span>
+<span class="t">int</span> <span class="o">*</span>p = <span class="f">malloc</span>(<span class="n">100</span>);
+p = <span class="f">malloc</span>(<span class="n">200</span>);     <span class="c">// original 100-byte block is now unreachable, never freed</span>
+
+<span class="c">// 2. Use-after-free</span>
+<span class="t">int</span> <span class="o">*</span>p = <span class="f">malloc</span>(<span class="k">sizeof</span>(<span class="t">int</span>));
+<span class="f">free</span>(p);
+<span class="o">*</span>p = <span class="n">5</span>;               <span class="c">// UB — writing through a dangling pointer</span>
+
+<span class="c">// 3. Double free</span>
+<span class="f">free</span>(p);
+<span class="f">free</span>(p);              <span class="c">// UB — usually corrupts the allocator's internal bookkeeping</span>
+
+<span class="c">// 4. Buffer overflow / out-of-bounds</span>
+<span class="t">int</span> <span class="o">*</span>p = <span class="f">malloc</span>(<span class="n">5</span> <span class="o">*</span> <span class="k">sizeof</span>(<span class="t">int</span>));
+p[<span class="n">5</span>] = <span class="n">1</span>;             <span class="c">// UB — one element past the allocated block</span></code></pre>
+
+<pre><code>gcc -fsanitize=address -g -o prog prog.c   <span class="c"># catches all four categories above at runtime</span>
+valgrind --leak-check=full ./prog          <span class="c"># alternative, no recompilation needed</span></code></pre>
+
+<h2>3.5 Stack vs. heap — what's actually different</h2>
+
+<table>
+<tr><th></th><th>Stack</th><th>Heap</th></tr>
+<tr><td><strong>Lifetime</strong></td><td>Tied to scope (function call)</td><td>Manual — you decide when it dies</td></tr>
+<tr><td><strong>Speed</strong></td><td>Very fast (just move a pointer)</td><td>Slower (allocator bookkeeping)</td></tr>
+<tr><td><strong>Size limit</strong></td><td>Small, fixed (often ~8MB)</td><td>Large, limited by system memory</td></tr>
+<tr><td><strong>Who manages it</strong></td><td>Compiler, automatically</td><td>You, manually (<code>malloc</code>/<code>free</code>)</td></tr>
+<tr><td><strong>Returning a pointer to it</strong></td><td><strong>Dangling pointer bug</strong></td><td>Fine, as long as it's freed eventually</td></tr>
+</table>
+
+<pre><code><span class="t">int</span> <span class="o">*</span><span class="f">make_stack_bad</span>() {
+    <span class="t">int</span> x = <span class="n">5</span>;
+    <span class="k">return</span> <span class="o">&amp;</span>x;       <span class="c">// x's stack frame is gone when this returns — DANGLING pointer returned</span>
+}
+
+<span class="t">int</span> <span class="o">*</span><span class="f">make_heap_good</span>() {
+    <span class="t">int</span> <span class="o">*</span>x = <span class="f">malloc</span>(<span class="k">sizeof</span>(<span class="t">int</span>));
+    <span class="o">*</span>x = <span class="n">5</span>;
+    <span class="k">return</span> x;         <span class="c">// fine — heap memory outlives the function; caller must free it</span>
+}</code></pre>
+
+<div class="warning">
+This is one of the most common bugs beginners hit right after they learn pointers: returning the address of a local variable. The compiler will often warn you (<code>-Wreturn-local-addr</code> or similar) — always heed that warning.
+</div>
+
+<h2>3.6 Structs and pointers — the arrow operator</h2>
+
+<pre><code><span class="k">typedef</span> <span class="k">struct</span> { <span class="t">int</span> x, y; } <span class="t">Point</span>;
+
+<span class="t">Point</span> p = {<span class="n">1</span>, <span class="n">2</span>};
+<span class="t">Point</span> <span class="o">*</span>pp = <span class="o">&amp;</span>p;
+
+(<span class="o">*</span>pp).x = <span class="n">10</span>;     <span class="c">// works, but clunky — must parenthesize, since . binds tighter than *</span>
+pp-&gt;x = <span class="n">10</span>;       <span class="c">// IDENTICAL meaning, much more readable</span></code></pre>
+
+<h3>Linked structures</h3>
+<p>Pointers-in-structs, recursively:</p>
+
+<pre><code><span class="k">typedef</span> <span class="k">struct</span> <span class="t">Node</span> {
+    <span class="t">int</span> data;
+    <span class="k">struct</span> <span class="t">Node</span> <span class="o">*</span>next;   <span class="c">// a struct containing a pointer to its own type</span>
+} <span class="t">Node</span>;
+
+<span class="t">Node</span> <span class="o">*</span>head = <span class="f">malloc</span>(<span class="k">sizeof</span>(<span class="t">Node</span>));
+head-&gt;data = <span class="n">1</span>;
+head-&gt;next = <span class="f">malloc</span>(<span class="k">sizeof</span>(<span class="t">Node</span>));
+head-&gt;next-&gt;data = <span class="n">2</span>;
+head-&gt;next-&gt;next = <span class="k">NULL</span>;
+
+<span class="c">// walking the list:</span>
+<span class="k">for</span> (<span class="t">Node</span> <span class="o">*</span>cur = head; cur != <span class="k">NULL</span>; cur = cur-&gt;next)
+    <span class="f">printf</span>(<span class="s">"%d "</span>, cur-&gt;data);</code></pre>
+
+<p>Every tree, linked list, and graph structure you'll build is fundamentally "structs holding pointers to other structs." This is also exactly where bugs 1–4 above show up most often in real programs — forgetting to free every node, freeing a node while another node still points to it, etc.</p>
+
+<div class="exercise-box">
+<h3>Exercises — Stage 3</h3>
+<ol>
+<li>Implement a generic singly linked list with <code>push_front</code>, <code>pop_front</code>, and <code>free_list</code> — run it under <code>-fsanitize=address</code> and deliberately introduce, then fix, a use-after-free.</li>
+<li>Write a function <code>int **alloc_2d(int rows, int cols)</code> that allocates a jagged 2D array (array of pointers, see 2.6b) and a matching <code>free_2d</code>. Trace through why freeing rows before freeing the outer array leaks memory, and why freeing the outer array first leaks the inner blocks.</li>
+<li>Build a 4-entry function pointer dispatch table for a basic calculator (<code>+ - * /</code>) and drive it from a <code>switch</code> on an operator character — then redo it <code>switch</code>-free, purely via the table.</li>
+<li>Explain, in terms of stack frames, exactly why <code>make_stack_bad()</code> above is broken — what's actually at that address after the function returns?</li>
+</ol>
+</div>
+
+<hr>
+
+<div class="stage-header">
+<h1>STAGE 4 — The C++ Pointer Model</h1>
+</div>
+
+<p>C++ doesn't replace pointers — it adds layers on top that make raw pointer-juggling the <em>last</em> resort rather than the everyday tool. This stage is as much about <em>judgment</em> (when to reach for what) as it is about syntax.</p>
+
+<h2>4.1 References — a pointer that pretends it isn't one</h2>
+
+<p>A reference is an alias for an existing object. Under the hood it's almost always implemented as a pointer, but the language hides the indirection from you.</p>
+
+<pre><code><span class="t">int</span> x = <span class="n">5</span>;
+<span class="t">int</span> <span class="o">&amp;</span>r = x;     <span class="c">// r IS x, not "a pointer to x"</span>
+r = <span class="n">10</span>;          <span class="c">// changes x directly</span>
+<span class="f">printf</span>(<span class="s">"%d\n"</span>, x);  <span class="c">// 10</span></code></pre>
+
+<table>
+<tr><th></th><th>Pointer</th><th>Reference</th></tr>
+<tr><td>Can be NULL / unbound</td><td>Yes</td><td>No — must bind to something at creation</td></tr>
+<tr><td>Can be reseated (point elsewhere later)</td><td>Yes</td><td>No — bound for life</td></tr>
+<tr><td>Needs <code>*</code>/<code>&amp;</code> to use</td><td>Yes</td><td>No — used like a normal variable</td></tr>
+<tr><td>Can do arithmetic</td><td>Yes</td><td>No</td></tr>
+<tr><td>Use case</td><td>Optional, reseatable, or array-like access</td><td>"Always refers to exactly this thing"</td></tr>
+</table>
+
+<pre><code><span class="t">void</span> <span class="f">inc_ptr</span>(<span class="t">int</span> <span class="o">*</span>x) { (<span class="o">*</span>x)++; }
+<span class="t">void</span> <span class="f">inc_ref</span>(<span class="t">int</span> <span class="o">&amp;</span>x) { x++; }       <span class="c">// same effect, cleaner call site</span>
+
+<span class="t">int</span> n = <span class="n">5</span>;
+<span class="f">inc_ptr</span>(<span class="o">&amp;</span>n);   <span class="c">// caller must remember to take the address</span>
+<span class="f">inc_ref</span>(n);    <span class="c">// caller just passes n — looks like pass-by-value, behaves like pass-by-reference</span></code></pre>
+
+<div class="note">
+<strong>Rule of thumb:</strong> prefer references for function parameters when the argument must exist and won't be reseated (the overwhelmingly common case). Reach for a raw pointer only when you genuinely need "maybe nothing" (nullability) or "this might change later" (reseating).
+</div>
+
+<h2>4.2 <code>const</code> references — avoiding copies without giving up safety</h2>
+
+<pre><code><span class="t">void</span> <span class="f">process</span>(<span class="k">const</span> std::string <span class="o">&amp;</span>s) {   <span class="c">// no copy made, caller's string can't be modified</span>
+    std::cout &lt;&lt; s.size();
+}
+<span class="t">void</span> <span class="f">process_bad</span>(std::string s) {        <span class="c">// COPIES the whole string on every call</span>
+    std::cout &lt;&lt; s.size();
+}</code></pre>
+
+<p>For anything bigger than a primitive (strings, vectors, your own structs/classes), pass by <code>const&amp;</code> unless you specifically need to mutate the caller's object (then non-const <code>&amp;</code>) or need your own copy (then by value, possibly to be moved-from — see 4.6).</p>
+
+<h2>4.3 <code>new</code> / <code>delete</code> — C++'s malloc/free, and why you should rarely call them directly</h2>
+
+<pre><code><span class="t">int</span> <span class="o">*</span>p = <span class="k">new</span> <span class="t">int</span>(<span class="n">5</span>);        <span class="c">// allocates AND initializes</span>
+<span class="k">delete</span> p;                    <span class="c">// calls the destructor, then frees</span>
+
+<span class="t">int</span> <span class="o">*</span>arr = <span class="k">new</span> <span class="t">int</span>[<span class="n">10</span>];      <span class="c">// array form</span>
+<span class="k">delete</span>[] arr;                 <span class="c">// MUST match — new[] requires delete[], never plain delete</span></code></pre>
+
+<div class="warning">
+Mixing <code>new</code>/<code>delete[]</code> or <code>new[]</code>/<code>delete</code> is undefined behavior. This asymmetry is one of several reasons the C++ community moved toward not calling <code>new</code>/<code>delete</code> directly at all in everyday code — see 4.5.
+</div>
+
+<h2>4.4 RAII — the actual core idea of modern C++ resource management</h2>
+
+<p><strong>RAII (Resource Acquisition Is Initialization)</strong>: tie a resource's lifetime to an object's lifetime. Acquire the resource in the constructor, release it in the destructor. Because C++ guarantees destructors run when an object leaves scope (even via exception, even via early <code>return</code>), the resource is <em>guaranteed</em> to be cleaned up.</p>
+
+<pre><code><span class="k">class</span> <span class="t">FileHandle</span> {
+    <span class="t">FILE</span> <span class="o">*</span>f;
+<span class="k">public</span>:
+    <span class="f">FileHandle</span>(<span class="k">const</span> <span class="t">char</span> <span class="o">*</span>path) : f(<span class="f">fopen</span>(path, <span class="s">"r"</span>)) {}
+    <span class="k">~</span><span class="f">FileHandle</span>() { <span class="k">if</span> (f) <span class="f">fclose</span>(f); }     <span class="c">// ALWAYS runs when the object dies</span>
+    <span class="t">FILE</span> <span class="o">*</span><span class="f">get</span>() { <span class="k">return</span> f; }
+};
+
+<span class="t">void</span> <span class="f">read_file</span>() {
+    <span class="t">FileHandle</span> fh(<span class="s">"data.txt"</span>);
+    <span class="c">// ... use fh.get() ...</span>
+    <span class="c">// even if an exception is thrown here, or we return early,</span>
+    <span class="c">// ~FileHandle() STILL runs, fclose STILL happens</span>
+}   <span class="c">// &lt;- destructor fires here, automatically, deterministically</span></code></pre>
+
+<div class="note">
+This is the single biggest philosophical difference between raw C-style memory management and idiomatic C++: in C, "did I free everything on every code path?" is a question <em>you</em> must answer by inspection. In RAII-style C++, the answer is structurally guaranteed by the language's scoping rules.
+</div>
+
+<h2>4.5 Smart pointers — RAII for dynamic memory</h2>
+
+<h3><code>std::unique_ptr&lt;T&gt;</code> — sole ownership</h3>
+
+<pre><code><span class="d">#include</span> <span class="s">&lt;memory&gt;</span>
+
+std::unique_ptr&lt;<span class="t">int</span>&gt; p = std::make_unique&lt;<span class="t">int</span>&gt;(<span class="n">5</span>);
+<span class="c">// no delete needed — when p goes out of scope, the int is freed automatically</span>
+
+std::unique_ptr&lt;<span class="t">int</span>&gt; p2 = std::move(p);   <span class="c">// ownership TRANSFERRED; p is now null</span>
+<span class="c">// std::unique_ptr&lt;int&gt; p3 = p2;           // ERROR — copying is disallowed</span></code></pre>
+
+<p><code>unique_ptr</code> cannot be copied — only moved — which is exactly the constraint you want for "exactly one owner."</p>
+
+<h3><code>std::shared_ptr&lt;T&gt;</code> — shared ownership, reference counted</h3>
+
+<pre><code>std::shared_ptr&lt;<span class="t">int</span>&gt; a = std::make_shared&lt;<span class="t">int</span>&gt;(<span class="n">5</span>);
+std::shared_ptr&lt;<span class="t">int</span>&gt; b = a;    <span class="c">// both now own it; refcount = 2</span>
+<span class="c">// memory freed only when the LAST shared_ptr is destroyed</span>
+<span class="f">printf</span>(<span class="s">"%ld\n"</span>, a.use_count());  <span class="c">// 2</span></code></pre>
+
+<h3><code>std::weak_ptr&lt;T&gt;</code> — observing without owning, breaking cycles</h3>
+
+<pre><code>std::shared_ptr&lt;<span class="t">int</span>&gt; sp = std::make_shared&lt;<span class="t">int</span>&gt;(<span class="n">5</span>);
+std::weak_ptr&lt;<span class="t">int</span>&gt; wp = sp;    <span class="c">// does NOT bump the refcount</span>
+
+<span class="k">if</span> (<span class="k">auto</span> locked = wp.lock()) {   <span class="c">// returns shared_ptr if alive, else nullptr</span>
+    <span class="f">printf</span>(<span class="s">"%d\n"</span>, <span class="o">*</span>locked);
+}
+sp.reset();    <span class="c">// object destroyed — wp.lock() returns nullptr from here on</span></code></pre>
+
+<div class="note">
+<strong>Why this exists:</strong> two <code>shared_ptr</code>s that point at each other will never hit refcount zero — a memory leak via reference cycle. Breaking one side into a <code>weak_ptr</code> fixes it.
+</div>
+
+<div class="diagram">shared_ptr cycle (LEAKS):              weak_ptr breaks it:
+Parent --shared_ptr--&gt; Child           Parent --shared_ptr--&gt; Child
+Parent &lt;--shared_ptr-- Child           Parent &lt;--weak_ptr---- Child
+(neither ever reaches refcount 0)      (Child doesn't keep Parent alive)</div>
+
+<h3>Decision guide</h3>
+
+<table>
+<tr><th>Situation</th><th>Use</th></tr>
+<tr><td>Exactly one owner, ownership can transfer</td><td><code>unique_ptr</code></td></tr>
+<tr><td>Multiple owners, lifetime genuinely shared</td><td><code>shared_ptr</code></td></tr>
+<tr><td>Need to reference without keeping it alive (cycles, caches, observers)</td><td><code>weak_ptr</code></td></tr>
+<tr><td>Passing/observing, not owning, function won't outlive the caller</td><td>raw pointer or reference</td></tr>
+<tr><td>C API interop (e.g., <code>FILE*</code>)</td><td>raw pointer, often via <code>.get()</code></td></tr>
+</table>
+
+<h2>4.6 Move semantics, <code>&amp;&amp;</code>, and why they exist</h2>
+
+<pre><code>std::vector&lt;<span class="t">int</span>&gt; <span class="f">make_big_vector</span>() {
+    std::vector&lt;<span class="t">int</span>&gt; v(<span class="n">1000000</span>, <span class="n">0</span>);
+    <span class="k">return</span> v;     <span class="c">// modern C++ MOVES instead of copying</span>
+}
+
+std::vector&lt;<span class="t">int</span>&gt; a = <span class="f">make_big_vector</span>();   <span class="c">// move, not copy — steals the internal pointer</span></code></pre>
+
+<p>A <code>std::vector</code> internally holds a pointer to heap-allocated data. <strong>Copying</strong> duplicates everything. <strong>Moving</strong> steals the internal pointer and nulls the source — O(1) instead of O(n).</p>
+
+<pre><code>std::vector&lt;<span class="t">int</span>&gt; src = {<span class="n">1</span>,<span class="n">2</span>,<span class="n">3</span>};
+std::vector&lt;<span class="t">int</span>&gt; dst = std::move(src);
+<span class="c">// dst holds src's old pointer; src is left empty — don't use it afterward</span></code></pre>
+
+<div class="exercise-box">
+<h3>Exercises — Stage 4</h3>
+<ol>
+<li>Take your linked list from Stage 3 and rewrite it in C++ using <code>unique_ptr&lt;Node&gt;</code> for <code>next</code>. Notice that <code>pop_front</code>/destruction now requires no manual <code>free</code> — explain why.</li>
+<li>Build a parent/child class pair using <code>shared_ptr</code> in both directions, observe that it leaks, then fix it with <code>weak_ptr</code>.</li>
+<li>Write a function that takes <code>const std::string&amp;</code> and one that takes <code>std::string</code> by value; call both in a loop with a large string and explain the performance difference.</li>
+<li>Implement a minimal <code>unique_ptr</code>-like class yourself (constructor, destructor, move constructor, move assignment, deleted copy constructor) for a single <code>int*</code>.</li>
+</ol>
+</div>
+
+<hr>
+
+<div class="stage-header">
+<h1>STAGE 5 — Advanced Pointer Techniques</h1>
+</div>
+
+<p>This stage assumes Stages 1–4 are solid. It's where pointers stop being "syntax for accessing memory" and start being "the mechanism C++ polymorphism, callback systems, and low-level data layout are built from."</p>
+
+<h2>5.1 How virtual functions actually work — vtables by hand</h2>
+
+<pre><code><span class="k">struct</span> <span class="t">Animal</span> {
+    <span class="k">virtual</span> <span class="t">void</span> <span class="f">speak</span>() { std::cout &lt;&lt; <span class="s">"...\n"</span>; }
+    <span class="k">virtual</span> <span class="k">~</span><span class="f">Animal</span>() = <span class="k">default</span>;
+};
+<span class="k">struct</span> <span class="t">Dog</span> : <span class="t">Animal</span> {
+    <span class="t">void</span> <span class="f">speak</span>() <span class="k">override</span> { std::cout &lt;&lt; <span class="s">"Woof\n"</span>; }
+};
+
+<span class="t">Animal</span> <span class="o">*</span>a = <span class="k">new</span> <span class="t">Dog</span>();
+a-&gt;<span class="f">speak</span>();   <span class="c">// prints "Woof" — resolved at RUNTIME via the vtable</span></code></pre>
+
+<div class="diagram">Dog object in memory:        Dog's vtable (shared, not per-object):
+[ vptr ] -----------------&gt;  [ &amp;Dog::speak ]
+[ ...Animal's data... ]      [ &amp;Dog::~Dog  ]
+[ ...Dog's data...     ]
+
+a-&gt;speak() compiles to roughly:
+  (*( (*a).vptr )[0])(a)     // follow vptr, index, call through function pointer</div>
+
+<pre><code><span class="c">// "Object-oriented C" — virtual dispatch by hand</span>
+<span class="k">typedef</span> <span class="k">struct</span> {
+    <span class="t">void</span> (<span class="o">*</span>speak)(<span class="t">void</span> <span class="o">*</span>self);
+} <span class="t">AnimalVTable</span>;
+
+<span class="k">typedef</span> <span class="k">struct</span> {
+    <span class="t">AnimalVTable</span> <span class="o">*</span>vtable;
+    <span class="t">int</span> legs;
+} <span class="t">Animal</span>;
+
+<span class="t">void</span> <span class="f">dog_speak</span>(<span class="t">void</span> <span class="o">*</span>self) { <span class="f">printf</span>(<span class="s">"Woof\n"</span>); }
+<span class="t">AnimalVTable</span> dog_vtable = { .speak = dog_speak };
+
+<span class="t">Animal</span> a = { .vtable = <span class="o">&amp;</span>dog_vtable, .legs = <span class="n">4</span> };
+a.vtable-&gt;<span class="f">speak</span>(<span class="o">&amp;</span>a);   <span class="c">// exactly the dispatch mechanism above, written explicitly</span></code></pre>
+
+<h2>5.2 Pointer-to-member — a genuinely weird corner of C++</h2>
+
+<pre><code><span class="k">struct</span> <span class="t">Foo</span> {
+    <span class="t">int</span> val;
+    <span class="t">int</span> <span class="f">getVal</span>() { <span class="k">return</span> val; }
+};
+
+<span class="t">int</span> (Foo::<span class="o">*</span>pm)() = <span class="o">&amp;</span>Foo::getVal;
+
+<span class="t">Foo</span> f{<span class="n">42</span>};
+std::cout &lt;&lt; (f.<span class="o">*</span>pm)();    <span class="c">// .* dereferences a pointer-to-member ON an object</span>
+
+<span class="t">Foo</span> <span class="o">*</span>fp = <span class="o">&amp;</span>f;
+std::cout &lt;&lt; (fp-&gt;<span class="o">*</span>pm)();  <span class="c">// -&gt;* does the same through a pointer</span></code></pre>
+
+<div class="note">
+A pointer-to-member is incomplete without an object — it's an <em>offset/selector</em>, not a standalone address.
+</div>
+
+<h2>5.3 <code>std::function</code> and lambdas vs. raw function pointers</h2>
+
+<pre><code><span class="t">int</span> x = <span class="n">10</span>;
+<span class="k">auto</span> lambda = [x](<span class="t">int</span> y) { <span class="k">return</span> x + y; };   <span class="c">// captures x — has internal state</span>
+
+std::function&lt;<span class="t">int</span>(<span class="t">int</span>)&gt; f = lambda;
+<span class="c">// a raw int(*)(int) CANNOT hold this lambda — no room for captured state</span></code></pre>
+
+<pre><code><span class="c">// roughly what the compiler generates:</span>
+<span class="k">struct</span> <span class="t">__lambda_anon</span> {
+    <span class="t">int</span> x;
+    <span class="t">int</span> <span class="k">operator</span>()(<span class="t">int</span> y) <span class="k">const</span> { <span class="k">return</span> x + y; }
+};</code></pre>
+
+<h2>5.4 Type punning, <code>reinterpret_cast</code>, and aliasing rules</h2>
+
+<pre><code><span class="t">float</span> f = <span class="n">3.14f</span>;
+<span class="t">int</span> <span class="o">*</span>ip = (<span class="t">int</span><span class="o">*</span>)<span class="o">&amp;</span>f;
+<span class="f">printf</span>(<span class="s">"%d\n"</span>, <span class="o">*</span>ip);    <span class="c">// UB — violates strict aliasing</span></code></pre>
+
+<p>Standards-compliant way (C):</p>
+<pre><code><span class="t">float</span> f = <span class="n">3.14f</span>;
+<span class="t">int</span> i;
+<span class="f">memcpy</span>(<span class="o">&amp;</span>i, <span class="o">&amp;</span>f, <span class="k">sizeof</span>(i));   <span class="c">// legal — copies raw bytes</span></code></pre>
+
+<p>C++20:</p>
+<pre><code><span class="t">int</span> i = std::bit_cast&lt;<span class="t">int</span>&gt;(f);   <span class="c">// compile-time-checked, well-defined</span></code></pre>
+
+<div class="warning">
+<strong>Why this matters:</strong> the compiler is allowed to assume aliasing rules hold and optimize accordingly. If you see "works in debug, breaks in release" involving raw pointer casts, aliasing is the first suspect.
+</div>
+
+<h2>5.5 Alignment, padding, and <code>alignas</code></h2>
+
+<pre><code><span class="k">struct</span> <span class="t">Bad</span> {
+    <span class="t">char</span> a;     <span class="c">// 1 byte</span>
+    <span class="t">int</span> b;      <span class="c">// 4 bytes — 3 bytes padding before it</span>
+    <span class="t">char</span> c;     <span class="c">// 1 byte + 3 bytes trailing padding</span>
+};
+<span class="f">printf</span>(<span class="s">"%zu\n"</span>, <span class="k">sizeof</span>(<span class="k">struct</span> <span class="t">Bad</span>));   <span class="c">// 12, not 6</span>
+
+<span class="k">struct</span> <span class="t">Good</span> {
+    <span class="t">int</span> b;
+    <span class="t">char</span> a;
+    <span class="t">char</span> c;     <span class="c">// 2 bytes trailing padding</span>
+};
+<span class="f">printf</span>(<span class="s">"%zu\n"</span>, <span class="k">sizeof</span>(<span class="k">struct</span> <span class="t">Good</span>));  <span class="c">// 8</span></code></pre>
+
+<div class="diagram">struct Bad layout:                    struct Good layout:
+[a][pad][pad][pad][ b: 4 bytes ][c][pad][pad][pad]   &lt;- 12 bytes
+[      b: 4 bytes      ][a][c][pad][pad]              &lt;- 8 bytes</div>
+
+<pre><code><span class="f">printf</span>(<span class="s">"offsetof(b) = %zu\n"</span>, <span class="f">offsetof</span>(<span class="k">struct</span> <span class="t">Bad</span>, b));
+<span class="f">printf</span>(<span class="s">"alignof(int) = %zu\n"</span>, <span class="k">_Alignof</span>(<span class="t">int</span>));</code></pre>
+
+<h2>5.6 <code>restrict</code> (C) — telling the compiler pointers don't alias</h2>
+
+<pre><code><span class="t">void</span> <span class="f">add_arrays</span>(<span class="t">int</span> <span class="o">*</span><span class="k">restrict</span> dst, <span class="k">const</span> <span class="t">int</span> <span class="o">*</span><span class="k">restrict</span> a,
+               <span class="k">const</span> <span class="t">int</span> <span class="o">*</span><span class="k">restrict</span> b, <span class="t">size_t</span> n) {
+    <span class="k">for</span> (<span class="t">size_t</span> i = <span class="n">0</span>; i &lt; n; i++) dst[i] = a[i] + b[i];
+    <span class="c">// compiler can vectorize freely — trusting dst/a/b never overlap</span>
+}
+<span class="c">// if you LIE with overlapping pointers, the behavior is undefined</span></code></pre>
+
+<h2>5.7 Placement new and manual object lifetime</h2>
+
+<pre><code><span class="d">#include</span> <span class="s">&lt;new&gt;</span>
+
+<span class="k">alignas</span>(<span class="t">int</span>) <span class="t">char</span> buffer[<span class="k">sizeof</span>(<span class="t">int</span>)];
+<span class="t">int</span> <span class="o">*</span>p = <span class="k">new</span> (buffer) <span class="t">int</span>(<span class="n">42</span>);   <span class="c">// construct IN buffer, no allocation</span>
+<span class="c">// ... use p ...</span>
+p-&gt;<span class="k">~</span><span class="t">int</span>();    <span class="c">// explicitly call destructor</span>
+<span class="c">// buffer is NOT freed — you didn't allocate it with new</span></code></pre>
+
+<h2>5.8 <code>std::launder</code> and pointer provenance (brief)</h2>
+
+<p><code>std::launder</code> (C++17) tells the compiler "forget what you think you know about what's at this address." A narrow, advanced tool for placement-new over former objects of different types.</p>
+
+<h2>5.9 Putting it together: a tiny pointer-based state machine</h2>
+
+<pre><code><span class="k">typedef</span> <span class="k">enum</span> { STATE_IDLE, STATE_RUNNING, STATE_DONE, NUM_STATES } <span class="t">State</span>;
+
+<span class="k">typedef</span> <span class="t">State</span> (<span class="o">*</span><span class="t">Handler</span>)(<span class="t">void</span> <span class="o">*</span>ctx);
+
+<span class="t">State</span> <span class="f">handle_idle</span>(<span class="t">void</span> <span class="o">*</span>ctx)    { <span class="f">printf</span>(<span class="s">"idle -&gt; running\n"</span>);  <span class="k">return</span> STATE_RUNNING; }
+<span class="t">State</span> <span class="f">handle_running</span>(<span class="t">void</span> <span class="o">*</span>ctx) { <span class="f">printf</span>(<span class="s">"running -&gt; done\n"</span>);  <span class="k">return</span> STATE_DONE; }
+<span class="t">State</span> <span class="f">handle_done</span>(<span class="t">void</span> <span class="o">*</span>ctx)    { <span class="f">printf</span>(<span class="s">"done\n"</span>);             <span class="k">return</span> STATE_DONE; }
+
+<span class="t">Handler</span> handlers[NUM_STATES] = { handle_idle, handle_running, handle_done };
+
+<span class="t">int</span> <span class="f">main</span>(<span class="t">void</span>) {
+    <span class="t">State</span> s = STATE_IDLE;
+    <span class="t">void</span> <span class="o">*</span>ctx = <span class="k">NULL</span>;
+    <span class="k">while</span> (s != STATE_DONE) s = handlers[s](ctx);
+    s = handlers[s](ctx);
+}</code></pre>
+
+<div class="exercise-box">
+<h3>Exercises — Stage 5</h3>
+<ol>
+<li>Build the hand-rolled vtable (5.1) into a 3-type hierarchy (<code>Cat</code>, <code>Dog</code>, <code>Bird</code>), add a second virtual function (<code>move</code>), and confirm every type's vtable needs entries in the same slot order.</li>
+<li>Demonstrate strict-aliasing UB (5.4): write the <code>float*</code>→<code>int*</code> pun, compile at <code>-O0</code> and <code>-O2</code>, see if output differs. Fix with <code>memcpy</code> and confirm stability.</li>
+<li>Write a struct with 4+ members of mixed sizes, compute <code>sizeof</code> by hand for alignment/padding, verify with <code>sizeof</code> and <code>offsetof</code>.</li>
+<li>Implement the state machine (5.9) for a traffic light or JSON tokenizer using function pointer dispatch.</li>
+<li><strong>(Capstone)</strong> Wrap your custom allocator in a RAII C++ class satisfying the standard allocator interface, then use it as the allocator template parameter for a <code>std::vector</code>.</li>
+</ol>
+</div>
+
+<hr>
+
+<div class="quick-ref">
+<h2>Quick Reference: Things to Re-Read When You Forget Them</h2>
+<ul>
+<li><strong>Declaration reading:</strong> read right-to-left from the variable name. <code>const int *const p</code> → "p is a const pointer to a const int."</li>
+<li><strong>Array decay:</strong> arrays decay to a pointer to their first element in <em>almost</em> every expression context, except <code>sizeof</code> and <code>&amp;arr</code>.</li>
+<li><strong><code>-&gt;</code> vs <code>.</code>:</strong> <code>-&gt;</code> is exactly <code>(*ptr).member</code> — use it on pointers, <code>.</code> on objects/references.</li>
+<li><strong><code>new</code>/<code>delete</code> matching:</strong> <code>new</code> ↔ <code>delete</code>, <code>new[]</code> ↔ <code>delete[]</code>. Never cross them.</li>
+<li><strong>Smart pointer default:</strong> reach for <code>unique_ptr</code> first. Only <code>shared_ptr</code> when ownership is <em>actually</em> shared.</li>
+<li><strong>Every heap bug is one of four:</strong> leak, use-after-free, double-free, out-of-bounds. Name it before debugging.</li>
+<li><strong>Release vs debug mismatch:</strong> suspect UB — uninitialized reads, aliasing violations, or out-of-bounds.</li>
+<li><strong>Compile with sanitizers always:</strong> <code>-fsanitize=address,undefined -g -O0</code>.</li>
+</ul>
+</div>
+
+</body>
+</html>
