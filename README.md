@@ -6,13 +6,6 @@ The goal of this repository is to build a clear mental model of addresses,
 indirection, memory layout, pointer arithmetic, ownership, and the common bugs
 that come from using pointers incorrectly.
 
-## Current Examples
-
-- `basic.c` - basic pointer declaration, address-of (`&`), dereference (`*`),
-  and modifying a variable through a pointer.
-- `pointer_types.c` - pointer sizes, `void*`, viewing object bytes with
-  `char*`, `NULL`, uninitialized pointers, and dangling pointers.
-
 ## Build And Run
 
 Compile a C file:
@@ -27,6 +20,11 @@ Compile the pointer types example:
 ```sh
 gcc -Wall -Wextra -pedantic -std=c11 pointer_types.c -o pointer_types
 ./pointer_types
+```
+Also
+
+```sh
+gcc -Wall -Wextra -g -fsanitize=address,undefined -o prog pointer_types.c && ./prog
 ```
 
 Compile a C++ file when C++ examples are added:
